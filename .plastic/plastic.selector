@@ -1,0 +1,3 @@
+repository "GAME245/FlashcardsGame@3159613@cloud"
+  path "/"
+    smartbranch "/main"

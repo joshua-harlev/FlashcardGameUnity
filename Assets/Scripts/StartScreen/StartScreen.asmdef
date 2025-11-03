@@ -1,0 +1,16 @@
+{
+    "name": "StartScreen",
+    "rootNamespace": "",
+    "references": [
+        "GUID:24cdb469ad2234babb547ded25d85720"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,40 @@
+:root {
+}
+
+.startButton {
+    width: 641px;
+    height: 124px;
+    background-color: rgb(124, 104, 147);
+    padding-top: 38px;
+    padding-right: 38px;
+    padding-bottom: 38px;
+    padding-left: 38px;
+    margin-top: 2px;
+    margin-right: 4px;
+    margin-bottom: 2px;
+    margin-left: 4px;
+    -unity-font-definition: url("project://database/Assets/Fonts/Outfit/static/Outfit-Medium.ttf?fileID=12800000&guid=210a6dd0ff15147f3ba75a1493656b61&type=3#Outfit-Medium");
+    font-size: 62px;
+    color: rgb(255, 255, 255);
+    transition-duration: 0.1s;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
+
+.startButton:hover {
+    background-color: rgb(102, 79, 128);
+    scale: 1.2 1.2 1.2;
+    transition-duration: 0.1s;
+}
+
+.optionsButton {
+    flex-shrink: 0;
+    width: 193px;
+    background-color: rgb(255, 255, 255);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+}
