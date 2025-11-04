@@ -42,12 +42,12 @@ public class InfoDisplay : MonoBehaviour {
     }
 
     /// <summary>
-    /// Updates all relevant UI components to represent the current state of the game.
+    /// Updates all relevant UI components to represent the current session of the game.
     /// </summary>
-    /// <param name="state">The current state of the game containing data such as round number, total rounds, and score.</param>
-    private void UpdateAll(GameState state) {
-        UpdateCurrentScore(state.CorrectAnswerCount, state.CurrentRoundNumber);
-        UpdateRoundNumber(state.CurrentRoundNumber, state.TotalNumberOfRoundsInGame);
+    /// <param name="session">The current session of the game containing data such as round number, total rounds, and score.</param>
+    private void UpdateAll(GameSession session) {
+        UpdateCurrentScore(session.CorrectAnswerCount, session.CurrentRoundNumber);
+        UpdateRoundNumber(session.CurrentRoundNumber, session.TotalNumberOfRoundsInGame);
     }
 
     /// <summary>

@@ -27,13 +27,13 @@ public class EndGameDisplay : MonoBehaviour
     [SerializeField]
     private GameObject EndGameGroup;
 
-    private GameState gameState;
+    private GameSession gameSession;
 
     [SerializeField]
     private TMP_Text unlockedAchievementsText;
 
     /// <summary>
-    /// Initializes the EndGameDisplay by subscribing to game action events related to state updates and gameplay end.
+    /// Initializes the EndGameDisplay by subscribing to game action events related to session updates and gameplay end.
     /// </summary>
     private void Awake() {
         GameActions.OnStateDataUpdate += UpdateScore;
@@ -42,7 +42,7 @@ public class EndGameDisplay : MonoBehaviour
     }
 
     /// <summary>
-    /// Performs cleanup by unsubscribing from the game action events related to state updates
+    /// Performs cleanup by unsubscribing from the game action events related to session updates
     /// and gameplay end when the object is destroyed.
     /// </summary>
     private void OnDestroy() {
@@ -54,10 +54,10 @@ public class EndGameDisplay : MonoBehaviour
     /// <summary>
     /// Updates the displayed score with the number of correct answers and the total number of rounds completed.
     /// </summary>
-    /// <param name="state">The current game state containing score and round information.</param>
-    private void UpdateScore(GameState state) {
-        this.gameState = state;
-        ScoreText.text = "score: " + state.CorrectAnswerCount + "/" + state.TotalNumberOfRoundsInGame;
+    /// <param name="session">The current game session containing score and round information.</param>
+    private void UpdateScore(GameSession session) {
+        this.gameSession = session;
+        ScoreText.text = "score: " + session.CorrectAnswerCount + "/" + session.TotalNumberOfRoundsInGame;
     }
 
     /// <summary>
@@ -66,7 +66,7 @@ public class EndGameDisplay : MonoBehaviour
     private void ShowScreen() {
         Debug.Log("---");
         Debug.Log("Unlocked Achievements:");
-        foreach (var achievementDefinition in gameState.achievementsUnlockedThisRound) {
+        foreach (var achievementDefinition in gameSession.achievementsUnlockedThisRound) {
             Debug.Log(achievementDefinition.Name);
         }
         Debug.Log("---");
@@ -76,9 +76,9 @@ public class EndGameDisplay : MonoBehaviour
     /// <summary>
     /// Updates the displayed list of achievements unlocked during the current round on the end game screen.
     /// </summary>
-    /// <param name="state">The current game state containing information about achievements unlocked this round.</param>
-    private void UpdateDisplayedAchievements(GameState state) {
-        var achievementDefinitions = state.achievementsUnlockedThisRound;
+    /// <param name="session">The current game session containing information about achievements unlocked this round.</param>
+    private void UpdateDisplayedAchievements(GameSession session) {
+        var achievementDefinitions = session.achievementsUnlockedThisRound;
         string textToDisplay = achievementDefinitions.Aggregate("", (current, definition) => current + ", " + definition.Name);
         if(textToDisplay.Length > 0) textToDisplay = textToDisplay.Substring(2, textToDisplay.Length-2);
         if (textToDisplay == "") {

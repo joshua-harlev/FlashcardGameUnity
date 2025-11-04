@@ -25,9 +25,9 @@ public static class GameActions {
     public static Action OnRoundEnd;
 
     /// <summary>
-    /// Event triggered when the game's state data is updated. Provides the updated <see cref="GameState"/> object to any subscribed listeners.
+    /// Event triggered when the game's state data is updated. Provides the updated <see cref="GameSession"/> object to any subscribed listeners.
     /// </summary>
-    public static Action<GameState> OnStateDataUpdate;
+    public static Action<GameSession> OnStateDataUpdate;
 
     /// <summary>
     /// Event triggered when an answer is selected during gameplay.

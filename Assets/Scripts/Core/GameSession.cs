@@ -5,19 +5,19 @@ using System.Collections.Generic;
  * Course Info: GAME 245-02
  * For: PA1
  * Overview:
- * GameState.cs | Manages game state variables.
+ * GameSession.cs | Manages game state variables.
  */
 
 /// <summary>
 /// Responsible for tracking and managing the game's overall state, including the current round,
 /// the number of correct answers, and the total number of rounds.
 /// </summary>
-public class GameState {
+public class GameSession {
     /// <summary>
-    /// Create a new GameState object
+    /// Create a new GameSession object
     /// </summary>
     /// <param name="TotalNumberOfRounds">Total number of rounds to play</param>
-    public GameState(int TotalNumberOfRounds = 3) {
+    public GameSession(int TotalNumberOfRounds = 3) {
         TotalNumberOfRoundsInGame = TotalNumberOfRounds;
     }
 
