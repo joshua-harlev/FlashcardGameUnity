@@ -1,6 +1,6 @@
 # Flashcard Game
 
-This project was my main project for the GAME245: Unity Programming project at Chapman University.
+This project is/was my main project for the GAME245: Unity Programming project at Chapman University.
 
 ## About Documentation
 
