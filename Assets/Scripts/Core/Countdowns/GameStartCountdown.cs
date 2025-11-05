@@ -46,13 +46,7 @@ public class GameStartCountdown : TextUpdateCountdown
         GameActions.OnGameSceneLoad += StartCountdown;
         SetGameCountdownPanelActive(true);
     }
-    
 
-    /// <summary>
-    /// Called when the script instance is being destroyed.
-    /// Unsubscribes from the game scene load event to prevent potential
-    /// event invocation on destroyed objects, ensuring proper cleanup.
-    /// </summary>
     protected override void OnDestroy() {
         base.OnDestroy();
         GameActions.OnGameSceneLoad -= StartCountdown;
@@ -69,7 +63,7 @@ public class GameStartCountdown : TextUpdateCountdown
     protected override void OnCountdownEnd()
     {
         SetGameCountdownPanelActive(false);
-        game.PlayRound();
+        Game.Instance.PlayRound();
     }
 
     /// <summary>
@@ -78,11 +72,18 @@ public class GameStartCountdown : TextUpdateCountdown
     /// </summary>
     /// <param name="timeRemaining">The time remaining in the countdown, in seconds.</param>
     protected override void OnTick(int timeRemaining) {
-        base.OnTick(timeRemaining-1);
-        if (timeRemaining == 1) {
-            UpdateCountdownText("Go!");
+        try {
+            base.OnTick(timeRemaining - 1);
+            if (timeRemaining == 1) {
+                UpdateCountdownText("Go!");
+            }
+
+            countdownText.fontSize =
+                Mathf.Lerp(initialFontSize, finalFontSize, (1f - timeRemaining / (float)countdownLength));
         }
-        countdownText.fontSize = Mathf.Lerp(initialFontSize, finalFontSize, (1f - timeRemaining / (float)countdownLength));
+        catch (Exception e) {
+            Debug.LogException(e);
+        }
     }
 
     /// <summary>

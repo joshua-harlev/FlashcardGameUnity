@@ -26,5 +26,12 @@ public class UnlockedAchievementsDisplay : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData) {
         SceneManager.LoadScene("Scenes/Achievements");
+        if (Game.Instance.StateMachine.CurrentState is ResultsState resultsState) {
+            resultsState.OnAchievementsClicked();
+        }
+        else {
+            DebugLogger.Log(LogChannel.Systems,
+                $"Start button was pressed but game was not in {nameof(Game.Instance.StateMachine.CurrentState)} state");
+        }
     }
 }

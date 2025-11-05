@@ -2,7 +2,9 @@
     "name": "StartScreen",
     "rootNamespace": "",
     "references": [
-        "GUID:24cdb469ad2234babb547ded25d85720"
+        "GUID:24cdb469ad2234babb547ded25d85720",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:9c281ff5e231f464cb1ce32346b8ea15"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -54,4 +54,6 @@ public static class GameActions {
     /// Event triggered when a command is executed in the game.
     /// </summary>
     public static Action<Command> OnCommandExecuted;
+
+    public static Action OnStartButtonClick;
 }

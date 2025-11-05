@@ -26,6 +26,13 @@ public class GameOptions : MonoBehaviour {
     /// Called when the restart button is pressed. Initiates loading of the game scene.
     /// </summary>
     public void OnRestartButtonPressed() {
+        if (Game.Instance.StateMachine.CurrentState is ResultsState resultsState) {
+            resultsState.OnRestartButtonPressed();
+        }
+        else {
+            DebugLogger.Log(LogChannel.Systems,
+                $"Restart button was pressed but game was in {nameof(Game.Instance.StateMachine.CurrentState)} state");
+        }
         StartCoroutine(LoadSceneAsync("Scenes/FlashcardGame"));
     }
 
@@ -44,11 +51,24 @@ public class GameOptions : MonoBehaviour {
     /// Called when the start button is pressed. Initiates loading of the game scene.
     /// </summary>
     public void OnStartButtonPressed() {
-        StartCoroutine(LoadSceneAsync("Scenes/FlashcardGame"));
+        if (Game.Instance.StateMachine.CurrentState is MainMenuState mainMenuState) {
+            mainMenuState.OnStartButtonPressed();
+        }
+        else {
+            DebugLogger.Log(LogChannel.Systems,
+                $"Start button was pressed but game was not in {nameof(Game.Instance.StateMachine.CurrentState)} state");
+        }
     }
 
     public void OnAchievementBackButtonPressed() {
-        StartCoroutine(LoadSceneAsync("Scenes/TitleScreen"));
+        if (Game.Instance.StateMachine.CurrentState is AchievementsState achievementsState) {
+            achievementsState.OnBackButtonPressed();
+            StartCoroutine(LoadSceneAsync("Scenes/TitleScreen"));
+        }
+        else {
+            DebugLogger.Log(LogChannel.Systems,
+                $"Back button was pressed but game was in {nameof(Game.Instance.StateMachine.CurrentState)} state");
+        }
     }
 
     /// <summary>
@@ -67,6 +87,13 @@ public class GameOptions : MonoBehaviour {
     }
 
     public void OnAchievementsButtonPressed() {
+        if (Game.Instance.StateMachine.CurrentState is MainMenuState mainMenuState) {
+            mainMenuState.OnAchievementsButtonPressed();
+        }
+        else {
+            DebugLogger.Log(LogChannel.Systems,
+                $"Achievements button was pressed but game was in {nameof(Game.Instance.StateMachine.CurrentState)} state");
+        }
         StartCoroutine(LoadSceneAsync("Scenes/Achievements"));
     }
 }

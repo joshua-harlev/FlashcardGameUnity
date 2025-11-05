@@ -48,8 +48,8 @@ public class RoundTimer : TextUpdateCountdown {
     /// </summary>
     protected override void OnCountdownEnd() {
         countdownText.text = "0 seconds";
-        game.EndRound();
-        game.PlayRound();
+        Game.Instance.EndRound();
+        Game.Instance.PlayRound();
     }
 
     /// <summary>

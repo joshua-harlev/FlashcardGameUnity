@@ -15,17 +15,30 @@ using UnityEngine;
 public class Game : MonoBehaviour {
     
     /// <summary>
+    /// Singleton instance.
+    /// </summary>
+    public static Game Instance { get; private set; }
+    
+    public StateMachine StateMachine { get; private set; }
+    
+    /// <summary>
     /// Determines the type of math problem used in the game, such as addition or multiplication.
     /// This variable is used to generate problems corresponding to the selected type during gameplay.
     /// </summary>
-    [SerializeField] private MathProblemType MathProblemType = MathProblemType.MultiplicationProblem;
+    [SerializeField] public MathProblemType SelectedProblemType = MathProblemType.MultiplicationProblem;
+    
+    /// <summary>
+    /// Selected number of questions for the current/next game.
+    /// </summary>
+    public int SelectedNumberOfQuestions { get; set; } = 3;
 
     /// <summary>
     /// Represents the current session of the game, including information such as the number
     /// of completed rounds, correct answers, and the total number of rounds in the game.
     /// It also provides functionality to advance the game session and determine if the game has ended.
     /// </summary>
-    private GameSession gameSession;
+    public GameSession GameSession { get; private set; }
+    
 
     private List<AchievementDefinition> achievementDefinitions;
 
@@ -36,6 +49,14 @@ public class Game : MonoBehaviour {
     /// Loads all achievement definitions.
     /// </summary>
     private void Awake() {
+        if (Instance != null && Instance != this) {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+        StateMachine = new StateMachine();
         GameActions.OnAnswerSelected += HandleAnswerChosen;
         GameActions.OnRoundTimerTick += UpdateTimeRemaining;
         GameActions.OnUnlockAchievement += OnUnlockAchievement;
@@ -46,7 +67,7 @@ public class Game : MonoBehaviour {
         AchievementDefinition achievementDefinition = achievementDefinitions.Find(x => x.Id == achievementId);
         UnlockAchievementCommand unlockAchievementCommand = new UnlockAchievementCommand(achievementDefinition);
         unlockAchievementCommand.Execute();
-        gameSession.achievementsUnlockedThisRound.Add(achievementDefinition);
+        GameSession.achievementsUnlockedThisRound.Add(achievementDefinition);
     }
 
     /// <summary>
@@ -56,8 +77,7 @@ public class Game : MonoBehaviour {
     /// and subscribing to necessary events.
     /// </summary>
     private void Start() {
-        gameSession = new GameSession();
-        GameActions.OnGameSceneLoad?.Invoke();
+        StateMachine.Initialize(StateMachine.MainMenuState);
     }
 
     /// <summary>
@@ -70,25 +90,32 @@ public class Game : MonoBehaviour {
         GameActions.OnUnlockAchievement -= OnUnlockAchievement;
     }
 
+    public void StartNewSession() {
+        GameSession = new GameSession(SelectedNumberOfQuestions);
+    }
+
     /// <summary>
     /// Initiates a new game round or handles game session transitions when the game is over.
     /// If the game is not over, starts the next round, generates a new math problem,
     /// updates the flashcard display, and begins the round countdown.
     /// </summary>
     public void PlayRound() {
-        if (gameSession.CurrentRoundNumber == 0) {
-            gameSession.achievementsUnlockedThisRound.Clear();
+        if (GameSession.CurrentRoundNumber == 0) {
+            GameSession.achievementsUnlockedThisRound.Clear();
             AchievementEvents.OnGameStart?.Invoke();
         }
-        if (gameSession.GameIsOver) {
-            AchievementEvents.OnGameComplete?.Invoke(gameSession.CorrectAnswerCount);
-            GameActions.OnStateDataUpdate?.Invoke(gameSession);
+        if (GameSession.GameIsOver) {
+            AchievementEvents.OnGameComplete?.Invoke(GameSession.CorrectAnswerCount);
+            GameActions.OnStateDataUpdate?.Invoke(GameSession);
             GameActions.OnGameplayEnd?.Invoke();
+            
+            ResultsState resultsState = new ResultsState();
+            StateMachine.TransitionTo(resultsState);
             return;
         }
-        gameSession.AdvanceRound();
-        GameActions.OnStateDataUpdate?.Invoke(gameSession);
-        GenerateQuestionCommand generateQuestionCommand = new GenerateQuestionCommand(MathProblemType);
+        GameSession.AdvanceRound();
+        GameActions.OnStateDataUpdate?.Invoke(GameSession);
+        GenerateQuestionCommand generateQuestionCommand = new GenerateQuestionCommand(SelectedProblemType);
         generateQuestionCommand.Execute();
         MathProblem problem = generateQuestionCommand.Problem;
         GameActions.OnProblemGenerated?.Invoke(problem);
@@ -102,11 +129,11 @@ public class Game : MonoBehaviour {
     /// </summary>
     public void EndRound() {
         GameActions.OnRoundEnd?.Invoke();
-        GameActions.OnStateDataUpdate?.Invoke(gameSession);
+        GameActions.OnStateDataUpdate?.Invoke(GameSession);
     }
 
     private void UpdateTimeRemaining(int timeRemaining) {
-        gameSession.CurrentTimeRemaining = timeRemaining;
+        GameSession.CurrentTimeRemaining = timeRemaining;
     }
     
 
@@ -116,7 +143,7 @@ public class Game : MonoBehaviour {
     /// </summary>
     /// <param name="isCorrect">Indicates whether the chosen answer is correct.</param>
     private void HandleAnswerChosen(bool isCorrect) {
-        gameSession.RegisterAnswer(isCorrect);
+        GameSession.RegisterAnswer(isCorrect);
         EndRound();
         PlayRound();
     }

@@ -20,11 +20,6 @@ public class TextUpdateCountdown : MonoBehaviour
     [SerializeField] private protected TMP_Text countdownText;
 
     /// <summary>
-    /// Represents the current game instance responsible for managing gameplay events and state transitions.
-    /// </summary>
-    [SerializeField] private protected Game game;
-
-    /// <summary>
     /// The duration of the countdown timer, in seconds.
     /// </summary>
     [SerializeField] protected int countdownLength = 5;

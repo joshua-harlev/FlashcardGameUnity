@@ -12,5 +12,8 @@
 public enum MathProblemType {
     AdditionProblem,
     MultiplicationProblem,
+    SubtractionProblem,
+    DivisionProblem,
+    AllProblems,
     Unset
 }
