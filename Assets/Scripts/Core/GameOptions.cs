@@ -6,9 +6,7 @@
  * GameOptions.cs | Manages game option buttons.
  */
 
-using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 
 /// <summary>
@@ -33,7 +31,6 @@ public class GameOptions : MonoBehaviour {
             DebugLogger.Log(LogChannel.Systems,
                 $"Restart button was pressed but game was in {nameof(Game.Instance.StateMachine.CurrentState)} state");
         }
-        StartCoroutine(LoadSceneAsync("Scenes/FlashcardGame"));
     }
 
     /// <summary>
@@ -63,26 +60,10 @@ public class GameOptions : MonoBehaviour {
     public void OnAchievementBackButtonPressed() {
         if (Game.Instance.StateMachine.CurrentState is AchievementsState achievementsState) {
             achievementsState.OnBackButtonPressed();
-            StartCoroutine(LoadSceneAsync("Scenes/TitleScreen"));
         }
         else {
             DebugLogger.Log(LogChannel.Systems,
                 $"Back button was pressed but game was in {nameof(Game.Instance.StateMachine.CurrentState)} state");
-        }
-    }
-
-    /// <summary>
-    /// Loads a scene asynchronously and displays a loading screen during the process.
-    /// </summary>
-    /// <param name="sceneName">The name of the scene to load.</param>
-    /// <returns>An enumerator for the asynchronous operation.</returns>
-    private IEnumerator LoadSceneAsync(string sceneName) {
-        GameObject LoadingScreen = Instantiate(LoadingScreenPrefab);
-        LoadingScreen.SetActive(true);
-        AsyncOperation loadOperation = SceneManager.LoadSceneAsync(sceneName);
-        loadOperation.allowSceneActivation = true;
-        while (!loadOperation.isDone) {
-            yield return null;
         }
     }
 
@@ -94,6 +75,5 @@ public class GameOptions : MonoBehaviour {
             DebugLogger.Log(LogChannel.Systems,
                 $"Achievements button was pressed but game was in {nameof(Game.Instance.StateMachine.CurrentState)} state");
         }
-        StartCoroutine(LoadSceneAsync("Scenes/Achievements"));
     }
 }

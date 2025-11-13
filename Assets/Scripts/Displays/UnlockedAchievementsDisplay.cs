@@ -25,13 +25,13 @@ public class UnlockedAchievementsDisplay : MonoBehaviour, IPointerClickHandler
     // the actual display functionality is delegated to the EndGameDisplay class
 
     public void OnPointerClick(PointerEventData eventData) {
-        SceneManager.LoadScene("Scenes/Achievements");
         if (Game.Instance.StateMachine.CurrentState is ResultsState resultsState) {
             resultsState.OnAchievementsClicked();
+            Game.Instance.StateMachine.TransitionTo(new AchievementsState());
         }
         else {
             DebugLogger.Log(LogChannel.Systems,
-                $"Start button was pressed but game was not in {nameof(Game.Instance.StateMachine.CurrentState)} state");
+                $"Achievements transition text was pressed but game was not in {nameof(Game.Instance.StateMachine.CurrentState)} state");
         }
     }
 }

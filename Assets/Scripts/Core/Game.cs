@@ -38,7 +38,6 @@ public class Game : MonoBehaviour {
     /// It also provides functionality to advance the game session and determine if the game has ended.
     /// </summary>
     public GameSession GameSession { get; private set; }
-    
 
     private List<AchievementDefinition> achievementDefinitions;
 
@@ -61,13 +60,6 @@ public class Game : MonoBehaviour {
         GameActions.OnRoundTimerTick += UpdateTimeRemaining;
         GameActions.OnUnlockAchievement += OnUnlockAchievement;
         achievementDefinitions = AchievementSaves.LoadAllAchievementDefinitions();
-    }
-
-    private void OnUnlockAchievement(string achievementId) {
-        AchievementDefinition achievementDefinition = achievementDefinitions.Find(x => x.Id == achievementId);
-        UnlockAchievementCommand unlockAchievementCommand = new UnlockAchievementCommand(achievementDefinition);
-        unlockAchievementCommand.Execute();
-        GameSession.achievementsUnlockedThisRound.Add(achievementDefinition);
     }
 
     /// <summary>
@@ -101,7 +93,7 @@ public class Game : MonoBehaviour {
     /// </summary>
     public void PlayRound() {
         if (GameSession.CurrentRoundNumber == 0) {
-            GameSession.achievementsUnlockedThisRound.Clear();
+            GameSession.AchievementsUnlockedThisRound.Clear();
             AchievementEvents.OnGameStart?.Invoke();
         }
         if (GameSession.GameIsOver) {
@@ -122,7 +114,6 @@ public class Game : MonoBehaviour {
         GameActions.OnRoundStart?.Invoke();
     }
     
-    
     /// <summary>
     /// Ends the current game round by stopping the countdown timer
     /// and updating the info display.
@@ -131,12 +122,18 @@ public class Game : MonoBehaviour {
         GameActions.OnRoundEnd?.Invoke();
         GameActions.OnStateDataUpdate?.Invoke(GameSession);
     }
+    
+    private void OnUnlockAchievement(string achievementId) {
+        AchievementDefinition achievementDefinition = achievementDefinitions.Find(x => x.Id == achievementId);
+        UnlockAchievementCommand unlockAchievementCommand = new UnlockAchievementCommand(achievementDefinition);
+        unlockAchievementCommand.Execute();
+        GameSession.AchievementsUnlockedThisRound.Add(achievementDefinition);
+    }
 
     private void UpdateTimeRemaining(int timeRemaining) {
         GameSession.CurrentTimeRemaining = timeRemaining;
     }
     
-
     /// <summary>
     /// Handles the chosen answer by registering it to the game session class,
     /// ending the current round, and starting a new round.

@@ -1,3 +1,5 @@
+using UnityEngine.SceneManagement;
+
 public class MainMenuState : IGameState {
     public void Enter() {
         DebugLogger.Log(LogChannel.Systems, $"Entering MainMenuState");
@@ -16,5 +18,6 @@ public class MainMenuState : IGameState {
     public void OnAchievementsButtonPressed() {
         AchievementsState achievementsState = new AchievementsState();
         Game.Instance.StateMachine.TransitionTo(achievementsState);
+        SceneManager.LoadScene("Scenes/Achievements");
     }
 }

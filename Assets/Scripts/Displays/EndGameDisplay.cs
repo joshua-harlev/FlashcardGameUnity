@@ -66,7 +66,7 @@ public class EndGameDisplay : MonoBehaviour
     private void ShowScreen() {
         Debug.Log("---");
         Debug.Log("Unlocked Achievements:");
-        foreach (var achievementDefinition in gameSession.achievementsUnlockedThisRound) {
+        foreach (var achievementDefinition in gameSession.AchievementsUnlockedThisRound) {
             Debug.Log(achievementDefinition.Name);
         }
         Debug.Log("---");
@@ -78,7 +78,7 @@ public class EndGameDisplay : MonoBehaviour
     /// </summary>
     /// <param name="session">The current game session containing information about achievements unlocked this round.</param>
     private void UpdateDisplayedAchievements(GameSession session) {
-        var achievementDefinitions = session.achievementsUnlockedThisRound;
+        var achievementDefinitions = session.AchievementsUnlockedThisRound;
         string textToDisplay = achievementDefinitions.Aggregate("", (current, definition) => current + ", " + definition.Name);
         if(textToDisplay.Length > 0) textToDisplay = textToDisplay.Substring(2, textToDisplay.Length-2);
         if (textToDisplay == "") {

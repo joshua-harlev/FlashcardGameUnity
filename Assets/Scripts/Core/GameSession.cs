@@ -38,7 +38,7 @@ public class GameSession {
     /// </summary>
     public int TotalNumberOfRoundsInGame { get; private set; } = 3;
     
-    public List<AchievementDefinition> achievementsUnlockedThisRound = new List<AchievementDefinition>();
+    public readonly List<AchievementDefinition> AchievementsUnlockedThisRound = new List<AchievementDefinition>();
     
 
     /// <summary>
@@ -72,6 +72,6 @@ public class GameSession {
     public void Reset() {
         CurrentRoundNumber = 0;
         CorrectAnswerCount = 0;
-        achievementsUnlockedThisRound.Clear();
+        AchievementsUnlockedThisRound.Clear();
     }
 }

@@ -6,6 +6,9 @@ public class StartScreenDisplayManager : MonoBehaviour {
 
     private void OnEnable() {
         GameActions.OnStartButtonClick += ShowOptionsMenu;
+        if (Game.Instance.StateMachine.CurrentState is SelectingOptionState selectingOptionState) {
+            ShowOptionsMenu();
+        }
     }
 
     private void OnDisable() {
