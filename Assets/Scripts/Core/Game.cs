@@ -97,7 +97,7 @@ public class Game : MonoBehaviour {
             AchievementEvents.OnGameStart?.Invoke();
         }
         if (GameSession.GameIsOver) {
-            AchievementEvents.OnGameComplete?.Invoke(GameSession.CorrectAnswerCount);
+            AchievementEvents.OnGameComplete?.Invoke(GameSession.CorrectAnswerCount, SelectedProblemType, SelectedNumberOfQuestions);
             GameActions.OnStateDataUpdate?.Invoke(GameSession);
             GameActions.OnGameplayEnd?.Invoke();
             

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,7 +19,7 @@ public class Achievements : MonoBehaviour {
     private Dictionary<string, AchievementProgress> achievementProgressTable;
     
     // Mathematician Variables:
-    private int numberOfAchievements;
+    public int NumberOfAchievements { get; private set; }
     private int numberOfUnlockedAchievements;
     
     // Math Master Variables:
@@ -30,6 +31,13 @@ public class Achievements : MonoBehaviour {
     private int APlusUnlock1Threshold = 1;
     private int APlusUnlock2Threshold = 10;
     private int APlusUnlock3Threshold = 30;
+    
+    // Perfect Achievement Variables
+    private string perfectDivisionID = "perfectdivider";
+    private string perfectAdditionID = "perfectadder";
+    private string perfectSubtractionID = "perfectsubtractor";
+    private string perfectMultiplicationID = "perfectmultiplier";
+    private string perfectAllID = "perfectmath";
     #endregion
     
     #region Setup
@@ -56,7 +64,7 @@ public class Achievements : MonoBehaviour {
     private void SetUpMathematicianVariables() {
         foreach (AchievementProgress achievementProgress in achievementProgressTable.Values) {
             if (achievementProgress.Id == "mathematician") continue;
-            numberOfAchievements++;
+            NumberOfAchievements++;
             if(achievementProgress.IsUnlocked) numberOfUnlockedAchievements++;
         }
     }
@@ -73,11 +81,42 @@ public class Achievements : MonoBehaviour {
     #endregion
     
     #region Event Delegators
-    private void OnGameComplete(int correctAnswers) {
-        TrackAPlus(correctAnswers);
+    private void OnGameComplete(int correctAnswers, MathProblemType mathProblemType, int selectedNumberOfQuestions) {
+        TrackAPlus(correctAnswers, selectedNumberOfQuestions);
         TrackDailyStreak();
+        TrackPerfectScores(correctAnswers, mathProblemType, selectedNumberOfQuestions);
     }
-    
+
+    private void TrackPerfectScores(int correctAnswers, MathProblemType mathProblemType, int selectedNumberOfQuestions) {
+        if (correctAnswers != selectedNumberOfQuestions) return;
+        switch (mathProblemType) {
+            case MathProblemType.AdditionProblem:
+                if (AchievementIsUnlocked(perfectAdditionID)) return;
+                UnlockAchievement(perfectAdditionID);
+                break;
+            case MathProblemType.SubtractionProblem:
+                if (AchievementIsUnlocked(perfectSubtractionID)) return;
+                UnlockAchievement(perfectSubtractionID);
+                break;
+            case MathProblemType.MultiplicationProblem:
+                if (AchievementIsUnlocked(perfectMultiplicationID)) return;
+                UnlockAchievement(perfectMultiplicationID);
+                break;
+            case MathProblemType.DivisionProblem:
+                if (AchievementIsUnlocked(perfectDivisionID)) return;
+                UnlockAchievement(perfectDivisionID);
+                break;
+            case MathProblemType.AllProblems:
+                if (AchievementIsUnlocked(perfectAllID)) return;
+                UnlockAchievement(perfectAllID);
+                break;
+            case MathProblemType.Unset:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(mathProblemType), mathProblemType, null);
+        }
+    }
+
     private void OnAnswerQuestionCorrectly(int timeRemaining) {
         TrackThatWasClose(timeRemaining);
         TrackMathMaster(timeRemaining);
@@ -105,7 +144,7 @@ public class Achievements : MonoBehaviour {
 
         numberOfUnlockedAchievements++;
         SetProgress("mathematician", numberOfUnlockedAchievements);
-        if (numberOfUnlockedAchievements == numberOfAchievements) {
+        if (numberOfUnlockedAchievements == NumberOfAchievements) {
             UnlockAchievement("mathematician");
         }
     }
@@ -178,7 +217,7 @@ public class Achievements : MonoBehaviour {
     // Achievement Name: A+
     // Achievement IDs: APlus1, APlus2, APlus3
     // Team Members: Brandon Wong, Kurt Lim, Savana Chou
-    private void TrackAPlus(int correctAnswers)
+    private void TrackAPlus(int correctAnswers, int selectedNumberOfQuestions)
     {
         string achievement1Id = "APlus1";
         string achievement2Id = "APlus2";
@@ -187,7 +226,7 @@ public class Achievements : MonoBehaviour {
             Debug.Log("A Plus 3: round was finished but achievement was already unlocked.");
             return;
         }
-        if (correctAnswers == numberOfProblems) //can make numberOfProblems reference a different script if helpful
+        if (correctAnswers == selectedNumberOfQuestions)
         {
             Debug.Log("Incrementing APlus");
             ++numberOfPerfectGamesCompleted;

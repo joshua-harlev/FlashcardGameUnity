@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,11 +23,17 @@ public class AchievementTracker : MonoBehaviour
     public Text MathMaster;
     public Text DailyStreak;
     public Text huh;
+    public Text[] Perfects;
 
-    void Start()
+    private string[] perfectIDs;
+    private string[] perfectIcons;
+
+    public Achievements Achievements;
+
+    private void Start()
     {
         var map = AchievementSaves.LoadAchievements();
-        mathematician.text = map["mathematician"].Progress + "/10";
+        mathematician.text = map["mathematician"].Progress + "/" + Achievements.NumberOfAchievements;
         
         if (map["thatwasclose"].IsUnlocked)
         {
@@ -53,6 +60,17 @@ public class AchievementTracker : MonoBehaviour
             huh.text = "1/1";
         }
         
-        
+        perfectIDs = new[] { "perfectadder", "perfectsubtractor", "perfectmultiplier", "perfectdivider", "perfectmath" };
+        perfectIcons = new[] { "+", "−", "×", "÷", "?" };
+        UpdatePerfects(map);
+
+    }
+
+    private void UpdatePerfects(Dictionary<string, AchievementProgress> achievementMap) {
+        for (int i = 0; i < perfectIDs.Length; i++) {
+            if (achievementMap[perfectIDs[i]].IsUnlocked) {
+                Perfects[i].text = perfectIcons[i];
+            }
+        }
     }
 }
