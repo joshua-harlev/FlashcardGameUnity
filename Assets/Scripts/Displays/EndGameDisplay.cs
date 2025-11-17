@@ -31,14 +31,17 @@ public class EndGameDisplay : MonoBehaviour
 
     [SerializeField]
     private TMP_Text unlockedAchievementsText;
-
+    
     /// <summary>
     /// Initializes the EndGameDisplay by subscribing to game action events related to session updates and gameplay end.
     /// </summary>
     private void Awake() {
-        GameActions.OnStateDataUpdate += UpdateScore;
-        GameActions.OnStateDataUpdate += UpdateDisplayedAchievements;
-        GameActions.OnGameplayEnd += ShowScreen;
+        GameActions.OnResultsScreenLoad += UpdateAll;
+    }
+
+    private void UpdateAll(GameSession session) {
+        UpdateDisplayedAchievements(session);
+        UpdateScore(session);
     }
 
     /// <summary>
@@ -46,9 +49,7 @@ public class EndGameDisplay : MonoBehaviour
     /// and gameplay end when the object is destroyed.
     /// </summary>
     private void OnDestroy() {
-        GameActions.OnStateDataUpdate -= UpdateScore;
-        GameActions.OnStateDataUpdate -= UpdateDisplayedAchievements;
-        GameActions.OnGameplayEnd -= ShowScreen;
+        GameActions.OnResultsScreenLoad -= UpdateAll;
     }
 
     /// <summary>
@@ -58,19 +59,6 @@ public class EndGameDisplay : MonoBehaviour
     private void UpdateScore(GameSession session) {
         this.gameSession = session;
         ScoreText.text = "score: " + session.CorrectAnswerCount + "/" + session.TotalNumberOfRoundsInGame;
-    }
-
-    /// <summary>
-    /// Displays the end game screen by activating the corresponding UI group.
-    /// </summary>
-    private void ShowScreen() {
-        Debug.Log("---");
-        Debug.Log("Unlocked Achievements:");
-        foreach (var achievementDefinition in gameSession.AchievementsUnlockedThisRound) {
-            Debug.Log(achievementDefinition.Name);
-        }
-        Debug.Log("---");
-        EndGameGroup.SetActive(true);
     }
 
     /// <summary>

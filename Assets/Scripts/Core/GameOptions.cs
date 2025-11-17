@@ -24,13 +24,8 @@ public class GameOptions : MonoBehaviour {
     /// Called when the restart button is pressed. Initiates loading of the game scene.
     /// </summary>
     public void OnRestartButtonPressed() {
-        if (Game.Instance.StateMachine.CurrentState is ResultsState resultsState) {
-            resultsState.OnRestartButtonPressed();
-        }
-        else {
-            DebugLogger.Log(LogChannel.Systems,
-                $"Restart button was pressed but game was in {nameof(Game.Instance.StateMachine.CurrentState)} state");
-        }
+        Game.Instance.StateMachine.ClearHistory();
+        Game.Instance.StateMachine.TransitionTo(new SelectingOptionState());
     }
 
     /// <summary>
@@ -57,13 +52,9 @@ public class GameOptions : MonoBehaviour {
         }
     }
 
-    public void OnAchievementBackButtonPressed() {
-        if (Game.Instance.StateMachine.CurrentState is AchievementsState achievementsState) {
-            achievementsState.OnBackButtonPressed();
-        }
-        else {
-            DebugLogger.Log(LogChannel.Systems,
-                $"Back button was pressed but game was in {nameof(Game.Instance.StateMachine.CurrentState)} state");
+    public void OnBackButtonPressed() {
+        if (!Game.Instance.StateMachine.TransitionToPrevious()) {
+            Debug.Log("Could not return to previous state; no state exists.");
         }
     }
 

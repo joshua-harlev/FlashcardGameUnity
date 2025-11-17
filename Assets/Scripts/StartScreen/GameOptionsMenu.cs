@@ -19,12 +19,7 @@ public class GameOptionsMenu : MonoBehaviour {
         SetProblemType();
         SetNumberOfQuestions();
 
-        if (Game.Instance.StateMachine.CurrentState is SelectingOptionState selectingOptionState) {
-            SelectingOptionState.OnOptionsConfirmed(mathProblemType, numberOfQuestions);
-        }
-        else {
-            Debug.LogError("GameOptionsMenu: current state is not SelectingOptionState.");
-        }
+        GameActions.OnGameOptionsSelected?.Invoke(mathProblemType, numberOfQuestions);
     }
 
     private void SetNumberOfQuestions() {

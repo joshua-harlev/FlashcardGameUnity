@@ -56,4 +56,8 @@ public static class GameActions {
     public static Action<Command> OnCommandExecuted;
 
     public static Action OnStartButtonClick;
+    
+    public static Action<GameSession> OnResultsScreenLoad;
+    
+    public static Action<MathProblemType, int> OnGameOptionsSelected;
 }

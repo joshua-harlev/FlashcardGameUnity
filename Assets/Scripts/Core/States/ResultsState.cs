@@ -1,23 +1,21 @@
+using UnityEditor.Rendering;
 using UnityEngine.SceneManagement;
 
-public class ResultsState : IGameState {
-    public void Enter() {
-        DebugLogger.Log(LogChannel.Systems, "Entering ResultsState");
+public class ResultsState : GameStateBase {
+    public override string StateName => "Results";
+
+    public override void Enter() {
+        SceneManager.sceneLoaded += SceneManagerOnsceneLoaded;
+        base.Enter();
+        SceneManager.LoadScene(SceneNames.Results);
     }
 
-    public void Exit() {
-        DebugLogger.Log(LogChannel.Systems, "Exiting ResultsState");
-    }
-
-    public void OnRestartButtonPressed() {
-        SelectingOptionState selectingOptionState = new SelectingOptionState();
-        Game.Instance.StateMachine.TransitionTo(selectingOptionState);
-        SceneManager.LoadScene("Scenes/TitleScreen");
+    private void SceneManagerOnsceneLoaded(Scene arg0, LoadSceneMode arg1) {
+        SceneManager.sceneLoaded -= SceneManagerOnsceneLoaded;
+        GameActions.OnResultsScreenLoad?.Invoke(Game.Instance.GameSession);
     }
 
     public void OnAchievementsClicked() {
-        AchievementsState achievementsState = new AchievementsState();
-        Game.Instance.StateMachine.TransitionTo(achievementsState);
-        SceneManager.LoadScene("Scenes/Achievements");
+        Game.Instance.StateMachine.TransitionTo(new AchievementsState());
     }
 }

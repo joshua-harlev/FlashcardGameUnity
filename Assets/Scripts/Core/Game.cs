@@ -99,7 +99,6 @@ public class Game : MonoBehaviour {
         if (GameSession.GameIsOver) {
             AchievementEvents.OnGameComplete?.Invoke(GameSession.CorrectAnswerCount, SelectedProblemType, SelectedNumberOfQuestions);
             GameActions.OnStateDataUpdate?.Invoke(GameSession);
-            GameActions.OnGameplayEnd?.Invoke();
             
             ResultsState resultsState = new ResultsState();
             StateMachine.TransitionTo(resultsState);

@@ -1,18 +1,18 @@
 using UnityEngine.SceneManagement;
 
-public class PlayingState : IGameState {
+public class PlayingState : GameStateBase {
+    public override string StateName => "Gameplay";
+    
     private MathProblemType problemType;
     
     public PlayingState(MathProblemType problemType) {
         this.problemType = problemType;
     }
-    public void Enter() {
-        DebugLogger.Log(LogChannel.Systems, $"Entering PlayingState: {problemType}");
+    
+    public override void Enter() {
+        base.Enter();
+        SceneManager.LoadScene(SceneNames.FlashcardGame);
         Game.Instance.StartNewSession();
-        SceneManager.LoadScene("FlashcardGame");
     }
 
-    public void Exit() {
-        DebugLogger.Log(LogChannel.Systems, $"Exiting PlayingState: {problemType}");
-    }
 }

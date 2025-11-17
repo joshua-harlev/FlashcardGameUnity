@@ -1,23 +1,21 @@
 using UnityEngine.SceneManagement;
 
-public class MainMenuState : IGameState {
-    public void Enter() {
-        DebugLogger.Log(LogChannel.Systems, $"Entering MainMenuState");
-    }
+public class MainMenuState : GameStateBase {
+    public override string StateName => "MainMenu";
 
-    public void Exit() {
-        DebugLogger.Log(LogChannel.Systems, $"Exiting MainMenuState");
+    public override void Enter() {
+        base.Enter();
+        if(SceneManager.GetActiveScene().name != SceneNames.TitleScreen) {
+            SceneManager.LoadScene(SceneNames.TitleScreen);
+        }
     }
 
     public void OnStartButtonPressed() {
-        SelectingOptionState selectingOptionState = new SelectingOptionState();
-        Game.Instance.StateMachine.TransitionTo(selectingOptionState);
+        Game.Instance.StateMachine.TransitionTo(new SelectingOptionState());
         GameActions.OnStartButtonClick?.Invoke();
     }
 
     public void OnAchievementsButtonPressed() {
-        AchievementsState achievementsState = new AchievementsState();
-        Game.Instance.StateMachine.TransitionTo(achievementsState);
-        SceneManager.LoadScene("Scenes/Achievements");
+        Game.Instance.StateMachine.TransitionTo(new AchievementsState());
     }
 }

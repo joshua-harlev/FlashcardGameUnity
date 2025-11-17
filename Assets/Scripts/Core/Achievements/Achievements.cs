@@ -33,11 +33,11 @@ public class Achievements : MonoBehaviour {
     private int APlusUnlock3Threshold = 30;
     
     // Perfect Achievement Variables
-    private string perfectDivisionID = "perfectdivider";
-    private string perfectAdditionID = "perfectadder";
-    private string perfectSubtractionID = "perfectsubtractor";
-    private string perfectMultiplicationID = "perfectmultiplier";
-    private string perfectAllID = "perfectmath";
+    private readonly string perfectDivisionID = "perfectdivider";
+    private readonly string perfectAdditionID = "perfectadder";
+    private readonly string perfectSubtractionID = "perfectsubtractor";
+    private readonly string perfectMultiplicationID = "perfectmultiplier";
+    private readonly string perfectAllID = "perfectmath";
     #endregion
     
     #region Setup
