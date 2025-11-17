@@ -1,13 +1,14 @@
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-
 /**
  * By: Ren Peng & Ryn Reid
  * Course Info: GAME 245-02
  * Overview:
  * AchievementTracker.cs | Achievement Tracker for UI
  */
+
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
 
 public class AchievementTracker : MonoBehaviour
 {

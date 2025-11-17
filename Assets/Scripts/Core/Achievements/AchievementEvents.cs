@@ -1,11 +1,12 @@
-using System;
-
 /**
  * By: J. Harlev
  * Course Info: GAME 245-02
  * Overview:
  * AchievementEvents.cs | Achievement Event Delegator
  */
+
+using System;
+
 
 /// Overview:
 /// Static class for managing and invoking achievement-related events within the game.

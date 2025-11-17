@@ -1,13 +1,14 @@
-using System;
-using System.Collections.Generic;
-using UnityEngine;
-
 /**
  * By: J. Harlev
  * Course Info: GAME 245-02
  * Overview:
  * Achievements.cs | Achievements logic class
  */
+
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+
 
 /// <summary>
 /// Designed to handle achievement-related functionality within a game.
