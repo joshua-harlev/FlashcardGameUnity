@@ -1,14 +1,15 @@
+/**
+ * By: J. Harlev
+ * Course Info: GAME 245-02
+ * Overview:
+ * GameActions.cs | Static class for game actions to be subscribed to.
+ */
 using System;
 
 /// <summary>
 /// Provides static events to manage and handle various actions within the game lifecycle.
 /// </summary>
 public static class GameActions {
-    /// <summary>
-    /// Event triggered when the gameplay session ends.
-    /// </summary>
-    public static Action OnGameplayEnd;
-
     /// <summary>
     /// Event triggered when the game scene is loaded.
     /// </summary>
@@ -54,10 +55,24 @@ public static class GameActions {
     /// Event triggered when a command is executed in the game.
     /// </summary>
     public static Action<Command> OnCommandExecuted;
-
-    public static Action OnStartButtonClick;
     
+    /// <summary>
+    /// Event triggered when the results screen is loaded
+    /// </summary>
     public static Action<GameSession> OnResultsScreenLoad;
     
+    /// <summary>
+    /// Event triggered when game options are confirmed.
+    /// </summary>
     public static Action<MathProblemType, int> OnGameOptionsSelected;
+
+    /// <summary>
+    /// Event triggered when countdown is complete for game start.
+    /// </summary>
+    public static Action OnCountdownComplete;
+    
+    /// <summary>
+    /// Event triggered when round timer runs out.
+    /// </summary>
+    public static Action OnRoundTimerEnd;
 }

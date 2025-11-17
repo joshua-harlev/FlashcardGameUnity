@@ -12,7 +12,6 @@ public class MainMenuState : GameStateBase {
 
     public void OnStartButtonPressed() {
         Game.Instance.StateMachine.TransitionTo(new SelectingOptionState());
-        GameActions.OnStartButtonClick?.Invoke();
     }
 
     public void OnAchievementsButtonPressed() {
