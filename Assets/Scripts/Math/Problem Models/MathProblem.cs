@@ -102,8 +102,16 @@ public abstract class MathProblem {
     /// <returns>A shuffled list of integers containing the correct answer and two fake answers.</returns>
     public List<int> GetAnswerList() {
         List<int> answers = new List<int>();
-        answers.Add(GetFakeAnswer());
-        answers.Add(GetFakeAnswer());
+        
+        int firstAnswer = GetFakeAnswer();
+        answers.Add(firstAnswer);
+        
+        int secondAnswer = GetFakeAnswer();
+        while (answer == secondAnswer) {
+            secondAnswer = GetFakeAnswer();
+        }
+        answers.Add(secondAnswer);
+        
         answers.Add(answer);
         ListTools.ShuffleList(ref answers);
         return answers;
