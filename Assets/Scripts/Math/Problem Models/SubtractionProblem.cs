@@ -14,7 +14,7 @@ public class SubtractionProblem : MathProblem {
     /// <summary>
     /// Represents the exclusive upper bound value used for generating numbers in a subtraction problem.
     /// </summary>
-    protected override int UPPER_BOUND_EXCLUSIVE { get; } = 100;
+    protected override int UPPER_BOUND_EXCLUSIVE { get; } = 101;
 
     /// <summary>
     /// Assigns the correct answer for the current math problem by calculating it using

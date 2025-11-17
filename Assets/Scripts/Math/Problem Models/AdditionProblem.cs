@@ -15,7 +15,7 @@ public class AdditionProblem : MathProblem {
     /// <summary>
     /// Represents the exclusive upper bound value used for generating numbers in an addition problem.
     /// </summary>
-    protected override int UPPER_BOUND_EXCLUSIVE { get; } = 1000;
+    protected override int UPPER_BOUND_EXCLUSIVE { get; } = 101;
 
     /// <summary>
     /// Assigns the correct answer for the current math problem by calculating it using
