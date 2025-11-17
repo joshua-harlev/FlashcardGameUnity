@@ -1,4 +1,4 @@
-// Original code by Jon Humphreys
+// Original code from Jon Humphreys
 using System;
 using System.IO;
 using System.Collections.Generic;

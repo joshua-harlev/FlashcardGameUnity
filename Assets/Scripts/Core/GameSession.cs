@@ -1,12 +1,10 @@
-using System.Collections.Generic;
-
 /**
  * By: J. Harlev
  * Course Info: GAME 245-02
- * For: PA1
  * Overview:
  * GameSession.cs | Manages game state variables.
  */
+using System.Collections.Generic;
 
 /// <summary>
 /// Responsible for tracking and managing the game's overall state, including the current round,

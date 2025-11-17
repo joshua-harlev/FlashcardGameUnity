@@ -5,7 +5,6 @@ using UnityEngine.UI;
 /**
  * By: Ren Peng & Ryn Reid
  * Course Info: GAME 245-02
- * For: PA2
  * Overview:
  * AchievementTracker.cs | Achievement Tracker for UI
  */

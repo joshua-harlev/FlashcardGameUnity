@@ -3,7 +3,6 @@ using System;
 /**
  * By: J. Harlev
  * Course Info: GAME 245-02
- * For: PA2
  * Overview:
  * AchievementEvents.cs | Achievement Event Delegator
  */

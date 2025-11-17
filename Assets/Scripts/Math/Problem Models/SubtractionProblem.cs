@@ -1,4 +1,9 @@
-using UnityEngine;
+/**
+ * By: J. Harlev
+ * Course Info: GAME 245-02
+ * Overview:
+ * SubtractionProblem.cs | Models a subtraction problem.
+ */
 
 public class SubtractionProblem : MathProblem {
     /// <summary>

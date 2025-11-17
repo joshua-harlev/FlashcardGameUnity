@@ -1,3 +1,9 @@
+/**
+ * By: J. Harlev
+ * Course Info: GAME 245-02
+ * Overview:
+ * MainMenuState.cs | Manages main menu scene transitions.
+ */
 using UnityEngine.SceneManagement;
 
 public class MainMenuState : GameStateBase {

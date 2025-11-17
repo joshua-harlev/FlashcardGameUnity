@@ -1,7 +1,6 @@
 /**
  * By: J. Harlev
  * Course Info: GAME 245-02
- * For: PA1
  * Overview:
  * FlashcardDisplay.cs | Manages Flashcard display panel
  */
@@ -34,12 +33,6 @@ public class FlashcardDisplay : MonoBehaviour {
     /// List of answer buttons displayed to the user, each representing a possible answer to the current flashcard question.
     /// </summary>
     public List<AnswerButton> AnswerButtons;
-
-    /// <summary>
-    /// Event triggered when an answer is chosen, passing a boolean indicating
-    /// whether the selected answer is correct.
-    /// </summary>
-    public Action<bool> OnAnswerChosen;
 
     /// <summary>
     /// Tracks the current math problem displayed on the flashcard.

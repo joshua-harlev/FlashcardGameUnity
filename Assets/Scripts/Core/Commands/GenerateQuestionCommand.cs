@@ -3,7 +3,6 @@ using UnityEngine;
 /**
  * By: J. Harlev
  * Course Info: GAME 245-02
- * For: PA2
  * Overview:
  * GenerateQuestionCommand.cs | Generate Question Command Class
  */

@@ -1,3 +1,9 @@
+/**
+ * By: J. Harlev
+ * Course Info: GAME 245-02
+ * Overview:
+ * ButtonToggleGroup.cs | A button toggle group.
+ */
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

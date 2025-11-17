@@ -1,3 +1,9 @@
+/**
+ * By: J. Harlev
+ * Course Info: GAME 245-02
+ * Overview:
+ * SelectingOptionState.cs | Manages option selection state actions.
+ */
 using UnityEngine.SceneManagement;
 
 public class SelectingOptionState : GameStateBase {

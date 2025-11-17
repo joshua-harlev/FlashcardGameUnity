@@ -1,3 +1,9 @@
+/**
+ * By: J. Harlev
+ * Course Info: GAME 245-02
+ * Overview:
+ * GameplayScene.cs | Triggers scene load event one frame after gameplay scene loads. 
+ */
 using System.Collections;
 using UnityEngine;
 

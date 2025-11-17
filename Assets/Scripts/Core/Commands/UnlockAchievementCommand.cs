@@ -1,7 +1,6 @@
 /**
  * By: J. Harlev
  * Course Info: GAME 245-02
- * For: PA2
  * Overview:
  * UnlockAchievementCommand.cs | Unlock Achievement Command Class
  */

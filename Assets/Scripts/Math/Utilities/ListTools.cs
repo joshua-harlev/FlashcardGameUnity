@@ -1,10 +1,10 @@
 /**
  * By: J. Harlev
  * Course Info: GAME 245-02
- * For: PA1
  * Overview:
  * ListTools.cs | Provides utility methods for working with lists.
  */
+
 using System.Collections.Generic;
 using UnityEngine;
 

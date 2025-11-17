@@ -1,7 +1,6 @@
 /**
  * By: J. Harlev
  * Course Info: GAME 245-02
- * For: PA1
  * Overview:
  * MultiplicationProblem.cs | Models a multiplication problem.
  */

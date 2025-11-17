@@ -1,3 +1,9 @@
+/**
+ * By: J. Harlev
+ * Course Info: GAME 245-02
+ * Overview:
+ * GameOptionsMenu.cs | Game options selection screen manager.
+ */
 using UnityEngine;
 
 public class GameOptionsMenu : MonoBehaviour {

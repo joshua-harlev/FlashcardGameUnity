@@ -1,7 +1,6 @@
 /**
  * By: J. Harlev
  * Course Info: GAME 245-02
- * For: PA1
  * Overview:
  * EndGameDisplay.cs | Manages end of game display panel.
  */
@@ -26,8 +25,6 @@ public class EndGameDisplay : MonoBehaviour
     /// </summary>
     [SerializeField]
     private GameObject EndGameGroup;
-
-    private GameSession gameSession;
 
     [SerializeField]
     private TMP_Text unlockedAchievementsText;
@@ -57,7 +54,6 @@ public class EndGameDisplay : MonoBehaviour
     /// </summary>
     /// <param name="session">The current game session containing score and round information.</param>
     private void UpdateScore(GameSession session) {
-        this.gameSession = session;
         ScoreText.text = "score: " + session.CorrectAnswerCount + "/" + session.TotalNumberOfRoundsInGame;
     }
 

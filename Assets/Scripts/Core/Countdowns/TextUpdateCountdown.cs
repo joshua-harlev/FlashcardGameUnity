@@ -1,7 +1,6 @@
 /**
  * By: J. Harlev
  * Course Info: GAME 245-02
- * For: PA1
  * Overview:
  * TextUpdateCountdown.cs | Provides a configurable countdown a TMP_Text object display.
  */

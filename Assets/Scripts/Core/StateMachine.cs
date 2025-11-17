@@ -1,3 +1,9 @@
+/**
+ * By: J. Harlev
+ * Course Info: GAME 245-02
+ * Overview:
+ * StateMachine.cs | Manages overall scene transitions and tracking.
+ */
 using System;
 using System.Collections.Generic;
 

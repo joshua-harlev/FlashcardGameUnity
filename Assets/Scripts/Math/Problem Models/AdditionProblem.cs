@@ -1,12 +1,11 @@
-using UnityEngine;
-
 /**
  * By: J. Harlev
  * Course Info: GAME 245-02
- * For: PA1
  * Overview:
  * AdditionProblem.cs | Models an addition problem.
  */
+using UnityEngine;
+
 public class AdditionProblem : MathProblem {
     /// <summary>
     /// Represents the inclusive lower bound value for the generation of numbers in an addition problem.

@@ -1,7 +1,6 @@
 /**
  * By: J. Harlev
  * Course Info: GAME 245-02
- * For: PA2
  * Overview:
  * UnlockedAchievementsDisplay.cs | Click handler for the end-of-game unlocked achievements display
  */

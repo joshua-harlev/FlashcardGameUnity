@@ -1,3 +1,9 @@
+/**
+ * By: J. Harlev
+ * Course Info: GAME 245-02
+ * Overview:
+ * AchievementsState.cs | Manages achievement scene transitions.
+ */
 using UnityEngine.SceneManagement;
 
 public class AchievementsState : GameStateBase {
@@ -7,5 +13,4 @@ public class AchievementsState : GameStateBase {
         base.Enter();
         SceneManager.LoadScene(SceneNames.Achievements);
     }
-    
 }

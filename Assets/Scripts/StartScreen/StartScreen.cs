@@ -1,12 +1,12 @@
-using UnityEngine;
-using UnityEngine.UIElements;
 /**
  * By: J. Harlev
  * Course Info: GAME 245-02
- * For: PA2
  * Overview:
  * StartScreen.cs | Manages button handlers for start screen
  */
+
+using UnityEngine;
+using UnityEngine.UIElements;
 
 /// <summary>
 /// Manages button handlers for the title screen.

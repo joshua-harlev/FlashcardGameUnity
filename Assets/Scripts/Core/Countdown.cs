@@ -1,7 +1,6 @@
 /**
  * By: J. Harlev
  * Course Info: GAME 245-02
- * For: PA1
  * Overview:
  * Countdown.cs | Allows for a configurable countdown with onTick and onComplete actions.
  */

@@ -5,7 +5,6 @@ using UnityEngine;
 /**
  * By: J. Harlev
  * Course Info: GAME 245-02
- * For: PA2
  * Overview:
  * Achievements.cs | Achievements logic class
  */
