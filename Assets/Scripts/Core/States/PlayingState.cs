@@ -19,32 +19,35 @@ public class PlayingState : GameStateBase {
     
     public override void Enter() {
         base.Enter();
+        
         GameActions.OnGameSceneLoad += OnSceneLoaded;
-        GameActions.OnAnswerSelected += OnAnswerSelected;
         GameActions.OnCountdownComplete += OnCountdownComplete;
+        GameActions.OnAnswerSelected += OnAnswerSelected;
         GameActions.OnRoundTimerEnd += OnRoundTimerEnd;
         GameActions.OnRoundTimerTick += UpdateTimeRemaining;
         SceneManager.LoadScene(SceneNames.FlashcardGame);
     }
-
-    private void OnRoundTimerEnd() {
-        session.RegisterAnswer(false);
-        GameActions.OnRoundEnd?.Invoke();
-        GameActions.OnStateDataUpdate?.Invoke(session);
-        if (session.GameIsOver) {
-            EndGame();
-        }
-        else {
-            PlayRound();
-        }
+    
+    private void OnSceneLoaded() {
+        Game.Instance.StartNewSession();
+        session = Game.Instance.GameSession;
     }
-
+    
     private void OnCountdownComplete() {
         PlayRound();
     }
 
+    private void OnRoundTimerEnd() {
+        session.RegisterAnswer(false);
+        HandleRoundEndActions();
+    }
+
     private void OnAnswerSelected(bool isCorrect) {
         session.RegisterAnswer(isCorrect);
+        HandleRoundEndActions();
+    }
+    
+    private void HandleRoundEndActions() {
         GameActions.OnRoundEnd?.Invoke();
         GameActions.OnStateDataUpdate?.Invoke(session);
         
@@ -60,11 +63,6 @@ public class PlayingState : GameStateBase {
         AchievementEvents.OnGameComplete?.Invoke(session.CorrectAnswerCount, Game.Instance.SelectedProblemType, Game.Instance.SelectedNumberOfQuestions);
         GameActions.OnStateDataUpdate?.Invoke(session);
         Game.Instance.StateMachine.TransitionTo(new ResultsState());
-    }
-
-    private void OnSceneLoaded() {
-        Game.Instance.StartNewSession();
-        session = Game.Instance.GameSession;
     }
 
     private void PlayRound() {
