@@ -13,7 +13,6 @@ public class Game : MonoBehaviour {
     public StateMachine StateMachine { get; private set; }
     public MathProblemType SelectedProblemType;
     public int SelectedNumberOfQuestions { get; set; } = 3;
-    
     public GameSession GameSession { get; private set; }
     private List<AchievementDefinition> achievementDefinitions;
     
