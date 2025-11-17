@@ -7,7 +7,7 @@
 using UnityEngine.SceneManagement;
 
 public class SelectingOptionState : GameStateBase {
-    public override string StateName => "SelectingOptionState";
+    public override string StateName => "SelectingOption";
 
     public override void Enter() {
         base.Enter();
