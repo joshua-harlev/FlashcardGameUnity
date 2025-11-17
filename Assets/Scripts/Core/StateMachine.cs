@@ -9,13 +9,8 @@ using System.Collections.Generic;
 
 public class StateMachine {
     public IGameState CurrentState { get; private set; }
-    public readonly MainMenuState MainMenuState;
-    private Stack<IGameState> gameStateHistory = new Stack<IGameState>();
-    private bool trackHistory = true;
-
-    public StateMachine() {
-        MainMenuState = new MainMenuState();
-    }
+    public readonly MainMenuState MainMenuState = new();
+    private readonly Stack<IGameState> gameStateHistory = new Stack<IGameState>();
 
     public void Initialize(IGameState initialState) {
         if (initialState == null) {
@@ -26,12 +21,12 @@ public class StateMachine {
         DebugLogger.Log(LogChannel.Systems, $"State machine initialized to {initialState.StateName}");
     }
 
-    public void TransitionTo(IGameState newState) {
+    public void TransitionTo(IGameState newState, bool shouldPushToHistory = true) {
         if (newState == null) {
             throw new ArgumentNullException(nameof(newState));
         }
         DebugLogger.Log(LogChannel.Systems, $"Transitioning to {newState.StateName} from {CurrentState.StateName}");
-        if(trackHistory) gameStateHistory.Push(CurrentState);
+        if(shouldPushToHistory) gameStateHistory.Push(CurrentState);
         CurrentState.Exit();
         CurrentState = newState;
         CurrentState.Enter();
@@ -43,9 +38,7 @@ public class StateMachine {
         }
 
         IGameState previousState = gameStateHistory.Pop();
-        trackHistory = false;
-        TransitionTo(previousState);
-        trackHistory = true;
+        TransitionTo(previousState, false);
         
         return true;
     }
